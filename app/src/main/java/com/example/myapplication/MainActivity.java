@@ -4,22 +4,32 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText getId;
     private EditText getPassword;
+    private Context context;
 
     private AppCompatButton login;
     private AppCompatButton signUp;
     private AppCompatButton start;
 
+//    MainActivity.context;
+
+
+
+    int cnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        context = this;
+
+        SharedPreferences pref = context.getSharedPreferences("userInfo", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
 
         getId = (EditText) findViewById(R.id.get_id);
         getPassword = (EditText) findViewById(R.id.get_password);
@@ -38,8 +54,22 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ShopActivity.class);
-                startActivity(intent);
+                cnt = pref.getInt("count", 0);
+                String id = getId.getText().toString();
+                String password = getPassword.getText().toString();
+                Log.i("x", "cnt : " + cnt);
+                for (int i=1; i <= cnt; i++) {
+                    if (pref.getString("userId" + i, "").equals(id)) {
+                        Log.i("x", "success");
+                        if (pref.getString("userPassword" + i, "").equals(password)) {
+                            Toast.makeText(getApplicationContext(),"로그인 되었습니다. 상품 페이지로 이동합니다.",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, ShopActivity.class);
+                            intent.putExtra("userId", i+"");
+                            startActivity(intent);
+                            break;
+                        }
+                    }
+                }
             }
         });
 
@@ -55,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ShopActivity.class);
+                intent.putExtra("userId", -1+"");
                 startActivity(intent);
             }
         });

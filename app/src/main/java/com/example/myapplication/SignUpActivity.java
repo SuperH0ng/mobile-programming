@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 
+import java.util.regex.Pattern;
+
 public class SignUpActivity extends Activity {
 
     private Context context;
@@ -33,7 +35,14 @@ public class SignUpActivity extends Activity {
 
     private AppCompatButton buttonSubmit;
 
-    private boolean submitValid = false;
+    private boolean isAgree = false;
+    private boolean isValidName = false;
+    private boolean isValidPhoneNumber = false;
+    private boolean isValidAddress = false;
+    private boolean isValidId = false;
+    private boolean isValidPassword = false;
+
+
 
     int cnt;
 
@@ -76,7 +85,7 @@ public class SignUpActivity extends Activity {
         getAgree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitValid = true;
+                isAgree = true;
                 buttonSubmit.setBackgroundDrawable(getDrawable(R.drawable.button_valid));
             }
         });
@@ -84,7 +93,7 @@ public class SignUpActivity extends Activity {
         getDisagree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitValid = false;
+                isAgree = false;
                 buttonSubmit.setBackgroundDrawable(getDrawable(R.drawable.button_basic));
             }
         });
@@ -92,7 +101,7 @@ public class SignUpActivity extends Activity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (submitValid) {
+                if (isAgree && isValidName && isValidPhoneNumber && isValidAddress && isValidId && isValidPassword) {
                     String name = getName.getText().toString();
                     String phone = getPhoneNumber.getText().toString();
                     String address = getAddress.getText().toString();
@@ -110,10 +119,100 @@ public class SignUpActivity extends Activity {
                     editor.commit();
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(),"빈 칸 없이 입력하고, 개인 정보 이용에 동의해 주세요.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"양식에 맞게 모두 입력해 주시고, 개인 정보 이용에 동의해 주세요.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        getName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+
+                } else {
+                    String name = getName.getText().toString();
+                    name.replaceAll(" ", "");
+                    if (!name.equals("")) {
+                        isValidName = true;
+                    } else {
+                        Toast.makeText(getApplicationContext(),"이름을 입력해 주세요.",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        getPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+
+                } else {
+                    String phone = getPhoneNumber.getText().toString();
+                    phone.replaceAll(" ", "");
+                    isValidPhoneNumber = Pattern.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", phone);
+                }
+                if (!isValidPhoneNumber) {
+                    Toast.makeText(getApplicationContext(),"전화번호가 유효하지 않습니다.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        getAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+
+                } else {
+                    String address = getAddress.getText().toString();
+                    address.replaceAll(" ", "");
+                    if (!address.equals("")) {
+                        isValidAddress = true;
+                    } else {
+                        Toast.makeText(getApplicationContext(),"주소를 입력해 주세요.",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        getId.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+
+                } else {
+                    String id = getId.getText().toString();
+                    id.replaceAll(" ", "");
+                    boolean isRepeatId = false;
+                    for (int i=1; i <= cnt; i++) {
+                        if (pref.getString("userId" + i, "").equals(id)) {
+                            isRepeatId = true;
+                            break;
+                        }
+                    }
+                    if (isRepeatId) {
+                        Toast.makeText(getApplicationContext(),"중복된 아이디입니다. 다른 아이디를 사용해 주세요.",Toast.LENGTH_SHORT).show();
+                        isValidId = false;
+                    }
+                    else
+                        isValidId = true;
+                }
+            }
+        });
+
+        getPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+
+                } else {
+                    String password = getPassword.getText().toString();
+                    isValidPassword = Pattern.matches("^[A-Za-z0-9]{6,12}$", password);
+                }
+                if (!isValidPassword)
+                    Toast.makeText(getApplicationContext(),"올바르지 않은 비밀번호 양식입니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 }

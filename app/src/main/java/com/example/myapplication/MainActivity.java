@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
+                Toast.makeText(getApplicationContext(),"없는 유저입니다.\n아이디와 비밀번호를 다시 한 번 확인해 주세요.",Toast.LENGTH_SHORT).show();
             }
         });
 

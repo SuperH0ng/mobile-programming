@@ -22,9 +22,9 @@ path : `app/src/main/java/com/example/myapplication/ShopActivity`
 * 아이디 입력창 : EditText
 * 비밀번호 입력창 : EditText
 * 로그인 버튼 : AppCompatButton
-  클릭 시 로그인 유효성 검사
-  유효하면 상품 페이지로 이동
+  \n클릭 시 로그인 유효성 검사
+  \n유효하면 상품 페이지로 이동
 * 회원가입 버튼 : AppCompatButton
-  클릭 시 회원가입 페이지로 이동
+  \n클릭 시 회원가입 페이지로 이동
 * 비회원으로 시작하기 : AppCompatButton
-  클릭 시 상품 페이지로 
+  \n클릭 시 상품 페이지로 

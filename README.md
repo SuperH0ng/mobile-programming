@@ -50,17 +50,43 @@ path : `app/src/main/java/com/example/myapplication/SignUpActivity`
 ![image](https://user-images.githubusercontent.com/81635179/199180605-8f77a6c3-179e-4b2a-a272-5cb288dd538f.png)
 
 * 이름 입력창 : EditText
+
+![image](https://user-images.githubusercontent.com/81635179/199225320-6a3c66f1-5459-4b1c-b973-88542613ec62.png)
+
+공백이 입력된다면 toast 메시지 출력
+
 * 전화번호 입력창 : EditText
+
+![image](https://user-images.githubusercontent.com/81635179/199224879-9dc28920-b999-48c1-aab2-ebe4dc1856cf.png)
+
+전화번호가 01012345678 의 양식이 아니라면 toast 메시지 출력
+
 * 주소 입력창 : EditText
+
+![image](https://user-images.githubusercontent.com/81635179/199225544-0802d2e3-d3e0-475e-9b9b-ae9fdcc112d0.png)
+
+공백이 입력된다면 toast 메시지 출력
+
 * 아이디 입력창 : EditText
+
+![image](https://user-images.githubusercontent.com/81635179/199225675-ce968b7b-a440-408d-8ba4-84f193e7a6ac.png)
+
+중복된 아이디가 입력된다면 toast 메시지 출력
+
 * 비밀번호 입력창 : EditText
+
+![image](https://user-images.githubusercontent.com/81635179/199225956-9b336e46-6b56-4b04-abaa-6d84c4a401ae.png)
+
+비밀번호가 (숫자, 문자 포함의 6~12자리 이내)의 양식을 따르지 않는다면 toast 메시지 출력
+
+
 * 개인정보 수집 및 이용 동의 : RadioGroup, RadioButton
 * 완료 버튼 : AppCompatButton
   <br>모든 입력이 유효하면 완료버튼 활성화
   <br>클릭 시 로그인 페이지로 이동
   
-* 모든 값을 입력하지 않거나, 개인정보 수집에 동의하지 않으면 toast 메시지 출력
-![image](https://user-images.githubusercontent.com/81635179/199209960-21501751-6a47-4b47-ace5-f169ca4452f4.png)
+* 모든 값을 옳게 입력하지 않거나, 개인정보 수집에 동의하지 않으면 toast 메시지 출력
+![image](https://user-images.githubusercontent.com/81635179/199226607-a530c296-136a-4492-a418-49022886799a.png)
 
 * 모든 값 입력 후, 개인정보 수집에 동의하면 완료 버튼 활성화
 ![image](https://user-images.githubusercontent.com/81635179/199210901-afca3650-3627-4d2a-ae27-7d35de982845.png)

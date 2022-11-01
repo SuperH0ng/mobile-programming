@@ -206,7 +206,7 @@ public class SignUpActivity extends Activity {
 
                 } else {
                     String password = getPassword.getText().toString();
-                    isValidPassword = Pattern.matches("^[A-Za-z0-9]{6,12}$", password);
+                    isValidPassword = Pattern.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{6,15}.$", password);
                 }
                 if (!isValidPassword)
                     Toast.makeText(getApplicationContext(),"올바르지 않은 비밀번호 양식입니다.",Toast.LENGTH_SHORT).show();

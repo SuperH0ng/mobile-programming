@@ -77,7 +77,7 @@ path : `app/src/main/java/com/example/myapplication/SignUpActivity`
 
 ![image](https://user-images.githubusercontent.com/81635179/199225956-9b336e46-6b56-4b04-abaa-6d84c4a401ae.png)
 
-비밀번호가 (숫자, 문자 포함의 6~12자리 이내)의 양식을 따르지 않는다면 toast 메시지 출력
+비밀번호가 (숫자, 문자, 특수문자 포함의 6~15자리 이내)의 양식을 따르지 않는다면 toast 메시지 출력
 
 
 * 개인정보 수집 및 이용 동의 : RadioGroup, RadioButton
